@@ -15,12 +15,6 @@ user.last_name = "Dylan"
 user.password = user_clear_pwd
 print("New user: {}".format(user.display_name()))
 user.save()
-new_user = User()
-new_user.email = user_email
-new_user.pwd = "password"
-new_user.first_name = "Hope"
-new_user.last_name = "Iyamu"
-new_user.save()
 
 """ Retreive this user via the class BasicAuth """
 
@@ -41,5 +35,10 @@ print(u.display_name() if u is not None else "None")
 u = a.user_object_from_credentials(user_email, user_clear_pwd)
 print(u.display_name() if u is not None else "None")
 
-u = a.user_object_from_credentials(user_email, "password")
-print(u.display_name() if u is not None else "None")
+#ba = BasicAuth()
+res = a.user_object_from_credentials("u1@gmail.com", "pwd")
+if res is not None:
+    print("user_object_from_credentials must return None if 'user_email' is not linked to any user")
+    exit(1)
+    
+print("OK", end="")
