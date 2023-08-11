@@ -9,7 +9,7 @@ import os
 
 @app_views.route("/auth_session/login", methods=["POST"],
                  strict_slashes=False)
-def create_session() -> str:
+def login_view() -> str:
     """ creates a session for a user """
     email = request.form.get("email")
     password = request.form.get("password")
@@ -33,3 +33,11 @@ def create_session() -> str:
     res.set_cookie(cookie_name, session_id)
     return res
 
+@app_views.route("/auth_session/logout", methods=["DELETE"],
+                 strict_slashes=False)
+def logout_view() -> str:
+    """ logs a user our """
+    from api.v1.app import auth
+    if not auth.destroy_session(request):
+        abort(404)
+    return jsonify({}), 200
