@@ -62,7 +62,7 @@ def profile_unlogged() -> None:
 
 def profile_logged(session_id: str) -> None:
     """
-    tests profile endpoint with user logged in 
+    tests profile endpoint with user logged in
     """
     url = f"{BASE_URL}/profile"
     cookies = dict(session_id=session_id)

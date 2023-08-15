@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """ flask app module """
 from flask import (
-                    Flask, jsonify, 
+                    Flask, jsonify,
                     request, abort,
-                    make_response, redirect )
+                    make_response, redirect)
 from auth import Auth
 
 
@@ -52,6 +52,7 @@ def logout():
         return redirect("/")
     else:
         abort(403)
+
 
 @app.route("/profile", methods=["GET"], strict_slashes=False)
 def profile():

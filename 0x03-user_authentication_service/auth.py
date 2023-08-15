@@ -8,13 +8,13 @@ import uuid
 
 
 def _hash_password(password: str) -> bytes:
-    """ 
-    hasheas a password and returns the result 
+    """
+    hasheas a password and returns the result
     """
     if not password:
         return None
-    password_hash = bcrypt.hashpw(password.encode(), 
-                                    bcrypt.gensalt())
+    password_hash = bcrypt.hashpw(password.encode(),
+                                  bcrypt.gensalt())
     return password_hash
 
 
@@ -101,6 +101,6 @@ class Auth:
         except NoResultFound:
             raise ValueError
         password_hash = _hash_password(password)
-        self._db.update_user(user.id, 
+        self._db.update_user(user.id,
                              hashed_password=password_hash,
                              reset_token=None)
