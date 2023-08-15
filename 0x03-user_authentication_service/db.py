@@ -8,6 +8,7 @@ from sqlalchemy.exc import InvalidRequestError
 from sqlalchemy.orm.exc import NoResultFound
 from typing import TypeVar
 from user import Base, User
+import bcrypt
 
 
 class DB:
@@ -50,7 +51,7 @@ class DB:
             self._session.rollback()
             raise e
 
-    def update_user(self, user_id, **kwargs):
+    def update_user(self, user_id: int, **kwargs) -> None:
         """ updates the user """
         if not user_id:
             return None
@@ -63,3 +64,4 @@ class DB:
                 raise ValueError
             setattr(user, key, value)
         self._session.commit()
+
