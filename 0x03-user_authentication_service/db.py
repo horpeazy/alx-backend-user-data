@@ -57,13 +57,14 @@ class DB:
         """ finds a user by the arbitrary inouts """
         try:
             query = self._session.query(User).filter_by(**kwargs)
-            result = query.first()
-            if result is None:
+            user = query.one()
+            if user is None:
                 raise NoResultFound
-            return result
+            return user
         except InvalidRequestError as e:
-            self._session.rollback()
             raise e
+        finally:
+            self._session.close()
 
     def update_user(self, user_id: int, **kwargs) -> None:
         """ updates the user """
