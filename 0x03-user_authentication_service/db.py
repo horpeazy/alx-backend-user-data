@@ -63,6 +63,8 @@ class DB:
             if not user:
                 raise NoResultFound
             return user
+        except NoResultFound as e:
+            raise e
         except InvalidRequestError as e:
             raise e
 
