@@ -53,11 +53,11 @@ class DB:
             return None
         return new_user
 
-    def find_user_by(self, **kwargs: Dict[str, Any]) -> User:
+    def find_user_by(self, **kwargs: Dict[str, str]) -> User:
         """ finds a user by the arbitrary inputs """
         try:
             query = self._session.query(User).filter_by(**kwargs)
-            user = query.one()
+            user = query.first()
             if user is None:
                 raise NoResultFound
             return user
