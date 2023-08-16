@@ -7,7 +7,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
 from sqlalchemy.exc import InvalidRequestError
 from sqlalchemy.orm.exc import NoResultFound
-from typing import TypeVar, Dict
+from typing import TypeVar, Dict, Any
 from user import Base, User
 import bcrypt
 
@@ -53,8 +53,8 @@ class DB:
             return None
         return new_user
 
-    def find_user_by(self, **kwargs: Dict[str, str]) -> User:
-        """ finds a user by the arbitrary inouts """
+    def find_user_by(self, **kwargs: Dict[str, Any]) -> User:
+        """ finds a user by the arbitrary inputs """
         try:
             query = self._session.query(User).filter_by(**kwargs)
             user = query.one()
@@ -63,8 +63,6 @@ class DB:
             return user
         except InvalidRequestError as e:
             raise e
-        finally:
-            self._session.close()
 
     def update_user(self, user_id: int, **kwargs) -> None:
         """ updates the user """
