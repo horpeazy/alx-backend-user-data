@@ -55,7 +55,7 @@ class DB:
 
     def find_user_by(self, **kwargs: Dict[str, str]) -> User:
         """ finds a user by the arbitrary inputs """
-        if not kwargs:
+        if len(kwargs) == 0:
             raise NoResultFound("No result found")
         try:
             query = self._session.query(User).filter_by(**kwargs)
