@@ -63,8 +63,8 @@ class DB:
             if not user:
                 raise NoResultFound
             return user
-        except InvalidRequestError:
-            raise InvalidRequestError
+        except InvalidRequestError as e:
+            raise e
 
     def update_user(self, user_id: int, **kwargs: Dict[str, str]) -> None:
         """ updates the user """
