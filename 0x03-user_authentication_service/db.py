@@ -2,6 +2,7 @@
 """DB module
 """
 from sqlalchemy import create_engine
+from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
 from sqlalchemy.exc import InvalidRequestError
@@ -59,9 +60,10 @@ class DB:
             result = query.first()
             if result is None:
                 raise NoResultFound
-        except InvalidRequestError:
-            raise InvalidRequestError
-        return result
+            return result
+        except InvalidRequestError as e:
+            self._session.rollback()
+            raise e
 
     def update_user(self, user_id: int, **kwargs) -> None:
         """ updates the user """
