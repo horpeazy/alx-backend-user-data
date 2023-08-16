@@ -56,15 +56,15 @@ class DB:
     def find_user_by(self, **kwargs: Dict[str, str]) -> User:
         """ finds a user by the arbitrary inputs """
         if len(kwargs) == 0:
-            return None
+            raise NoResultFound
         try:
             query = self._session.query(User).filter_by(**kwargs)
             user = query.first()
             if not user:
                 raise NoResultFound
             return user
-        except InvalidRequestError as e:
-            raise e
+        except InvalidRequestError:
+            raise InvalidRequestError
 
     def update_user(self, user_id: int, **kwargs: Dict[str, str]) -> None:
         """ updates the user """
