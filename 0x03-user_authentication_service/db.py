@@ -6,7 +6,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
 from sqlalchemy.exc import InvalidRequestError
-from sqlalchemy.exc import NoResultFound
+from sqlalchemy.orm.exc import NoResultFound
 from typing import TypeVar, Dict
 from user import Base, User
 import bcrypt
@@ -49,7 +49,6 @@ class DB:
             self._session.add(new_user)
             self._session.commit()
         except Exception as e:
-            print(f"Error adding user to database: {e}")
             self._session.rollback()
             raise
         return new_user
