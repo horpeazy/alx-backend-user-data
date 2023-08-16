@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """ auth module """
 from sqlalchemy.orm.exc import NoResultFound
+from user import User
 from typing import TypeVar
 from db import DB
 import bcrypt
@@ -25,7 +26,7 @@ class Auth:
     def __init__(self):
         self._db = DB()
 
-    def register_user(self, email: str, password: str) -> TypeVar("User"):
+    def register_user(self, email: str, password: str) -> User:
         """ registers a user """
         if not email or not password:
             return None
