@@ -53,6 +53,7 @@ class DB:
             return None
         return new_user
 
+    @classmethod
     def find_user_by(self, **kwargs: Dict[str, str]) -> User:
         """ finds a user by the arbitrary inouts """
         try:
