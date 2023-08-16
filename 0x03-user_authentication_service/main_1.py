@@ -26,5 +26,6 @@ except NoResultFound:
 try:
     find_user = my_db.find_user_by()
     print(find_user.id)
-except InvalidRequestError:
+except Exception as e:
+    print(e, "exception")
     print("Invalid")
